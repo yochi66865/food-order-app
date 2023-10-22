@@ -12,7 +12,7 @@ export const AvailableMeals = () => {
       <ul className="meals">
         {meals.map((meal) => (
           <li key={meal.id}>
-            <MealItem meal={meal} amount={0} />
+            <MealItem meal={meal} amount={1} />
           </li>
         ))}
       </ul>

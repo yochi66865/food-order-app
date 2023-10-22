@@ -1,9 +1,12 @@
-import { CartIcon } from "../../../../shared/CartIcon/CartIcon";
+import { CartIcon } from "../../../shared/CartIcon/CartIcon";
 import classes from "./HeaderCartButton.module.css";
 
-export const HeaderCartButton = (props: { countInCart: number }) => {
+export const HeaderCartButton = (props: {
+  countInCart: number;
+  onClick: () => void;
+}) => {
   return (
-    <div className={classes.button}>
+    <button onClick={props.onClick} className={classes.button}>
       <div className={classes.icon}>
         <CartIcon />
       </div>{" "}
@@ -11,6 +14,6 @@ export const HeaderCartButton = (props: { countInCart: number }) => {
       <div className={classes.badge}>
         <div className={classes.bump}>{props.countInCart}</div>
       </div>
-    </div>
+    </button>
   );
 };
