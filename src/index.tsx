@@ -9,6 +9,8 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <React.StrictMode>
+    <div id="backdrop-root"></div>
+    <div id="overlay-root"></div>
     <App />
   </React.StrictMode>
 );
