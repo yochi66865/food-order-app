@@ -1,0 +1,16 @@
+import { InputData } from "../../models/inputData.model";
+import classes from "./Input.module.css";
+
+export const Input = ({ inputData }: { inputData: InputData }) => {
+  return (
+    <div className={classes.input}>
+      <label htmlFor={inputData.id}>{inputData.label}</label>
+      <input
+        id={inputData.id}
+        type={inputData.type}
+        value={inputData.value}
+        onChange={inputData.onChange}
+      />
+    </div>
+  );
+};
