@@ -9,6 +9,8 @@ export const Input = ({ inputData }: { inputData: InputData }) => {
         id={inputData.id}
         type={inputData.type}
         value={inputData.value}
+        min={inputData.min}
+        max={inputData.max}
         onChange={inputData.onChange}
       />
     </div>

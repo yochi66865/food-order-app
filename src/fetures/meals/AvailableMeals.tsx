@@ -13,12 +13,10 @@ export const AvailableMeals = () => {
   const [mealsData, setMealsData] = useState([] as MealInCart[]);
 
   useEffect(() => {
-    console.log("useEffect meals");
-
     setMealsData(
       meals.map((meal) => {
         const mealInCart = mealsInCart[meal.id];
-        return { ...meal, amount: mealInCart?.amount ?? 1 };
+        return { ...meal, amount: mealInCart?.amount ?? 0 };
       })
     );
   }, [cartCtx]);

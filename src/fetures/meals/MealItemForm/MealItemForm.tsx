@@ -1,6 +1,7 @@
-import { SyntheticEvent, useState } from "react";
+import { SyntheticEvent, useEffect, useReducer, useState } from "react";
 import { Input } from "../../../shared/Input/Input";
 import classes from "./MealItemForm.module.css";
+import { amountReducer } from "./amount-state/amount.reducer";
 
 export const MealItemForm = ({
   amount,
@@ -9,15 +10,23 @@ export const MealItemForm = ({
   amount: number;
   addToCart: (amount: number) => void;
 }) => {
-  const [amountMeal, changeAmountMeal] = useState(amount);
+  const [amountMeal, changeAmountMeal] = useReducer(amountReducer, {
+    amount: 0,
+    isValid: false,
+  });
+
+  useEffect(() => {
+    changeAmountMeal({ type: "UPDATE_AMOUNT", amount });
+  }, [amount]);
 
   const onSubmit = (submitEvent: SyntheticEvent) => {
     submitEvent.preventDefault();
-    addToCart(amountMeal);
+    addToCart(amountMeal.amount);
   };
 
   const changeAmount = (event: SyntheticEvent<HTMLInputElement>) => {
-    changeAmountMeal(+(event.target as HTMLInputElement).value);
+    const amount = +(event.target as HTMLInputElement).value;
+    changeAmountMeal({ type: "UPDATE_AMOUNT", amount });
   };
 
   return (
@@ -26,12 +35,19 @@ export const MealItemForm = ({
         inputData={{
           id: "amount",
           type: "number",
-          value: amountMeal,
+          value: amountMeal.amount,
           label: "Amount",
+          min: 0,
+          max: 5,
           onChange: changeAmount,
         }}
       ></Input>
-      <button type="submit">+Add</button>
+      <button
+        type="submit"
+        className={!amountMeal.isValid ? classes.disabled : ""}
+      >
+        +Add
+      </button>
     </form>
   );
 };
