@@ -1,8 +1,8 @@
-import { Meal } from "../../models/meal.model";
+import { MealInCart } from "./cartContext";
 
 export type addMealAction = {
   type: "ADD_MEAL";
-  value: { meal: Meal; amount: number };
+  value: { mealInCart: MealInCart };
 };
 
 export type deleteMealAction = {

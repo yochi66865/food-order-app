@@ -12,9 +12,9 @@ export const cartReducer: (
 ) => CartState = (state: CartState, action: cartAction) => {
   switch (action.type) {
     case "ADD_MEAL": {
-      const { meal, amount } = action.value;
+      const { mealInCart } = action.value;
       return {
-        meals: { ...state.meals, ...{ [meal.id]: { ...meal, amount } } },
+        meals: { ...state.meals, ...{ [mealInCart.id]: { ...mealInCart } } },
       };
     }
     case "DELETE_MEAL": {

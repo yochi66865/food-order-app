@@ -6,15 +6,17 @@ import { CartState, cartReducer } from "./cartReducer";
 export type MealInCart = Meal & { amount: number };
 
 export type cartType = {
+  getMapMeals: () => { [mealId: string]: MealInCart };
   getMeals: () => MealInCart[];
-  addMeal: (meal: Meal, amount: number) => void;
+  addMeal: (mealInCart: MealInCart) => void;
   deleteMeal: (mealId: string) => void;
   updateAmount: (mealId: string, amount: number) => void;
 };
 
 export const CartContext: Context<cartType> = createContext({
+  getMapMeals: () => ({} as { [mealId: string]: MealInCart }),
   getMeals: () => [] as MealInCart[],
-  addMeal: (meal: Meal, amount: number) => {},
+  addMeal: (mealInCart: MealInCart) => {},
   deleteMeal: (mealId: string) => {},
   updateAmount: (mealId: string, amount: number) => {},
 });
@@ -23,10 +25,17 @@ export const CartContextComponent = (props: { children: any }) => {
   const [cartState, dispatchCartAction]: [CartState, Dispatch<cartAction>] =
     useReducer(cartReducer, { meals: {} });
 
+  // const getMapMeals = () => ({ ...cartState.meals });
+  const getMapMeals = () => {
+    console.log("dddddddddddddddd");
+
+    return { ...cartState.meals };
+  };
+
   const getMeals = () => Object.values(cartState.meals);
 
-  const addMeal = (meal: Meal, amount: number) => {
-    dispatchCartAction({ type: "ADD_MEAL", value: { meal, amount } });
+  const addMeal = (mealInCart: MealInCart) => {
+    dispatchCartAction({ type: "ADD_MEAL", value: { mealInCart } });
   };
 
   const deleteMeal = (mealId: string) => {
@@ -41,7 +50,7 @@ export const CartContextComponent = (props: { children: any }) => {
   };
   return (
     <CartContext.Provider
-      value={{ getMeals, addMeal, deleteMeal, updateAmount }}
+      value={{ getMapMeals, getMeals, addMeal, deleteMeal, updateAmount }}
     >
       {props.children}
     </CartContext.Provider>

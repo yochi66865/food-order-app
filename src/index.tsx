@@ -3,6 +3,7 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import { App } from "./App";
 import reportWebVitals from "./reportWebVitals";
+import { CartContextComponent } from "./store/cart/cartContext";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -11,7 +12,9 @@ root.render(
   <React.StrictMode>
     <div id="backdrop-root"></div>
     <div id="overlay-root"></div>
-    <App />
+    <CartContextComponent>
+      <App />
+    </CartContextComponent>
   </React.StrictMode>
 );
 
