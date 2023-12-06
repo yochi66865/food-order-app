@@ -5,6 +5,8 @@
 /.pnp
 /extra-files
 .pnp.js
+/node_project/node_modules
+/node_project/dist
 
 # testing
 /coverage
