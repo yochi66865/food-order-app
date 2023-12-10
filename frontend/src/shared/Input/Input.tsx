@@ -1,4 +1,4 @@
-import { InputData } from "../../models/inputData.model";
+import { InputData } from "models/src/inputData.model";
 import classes from "./Input.module.css";
 
 export const Input = ({ inputData }: { inputData: InputData }) => {

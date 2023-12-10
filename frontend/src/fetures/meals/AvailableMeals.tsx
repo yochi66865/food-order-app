@@ -1,5 +1,5 @@
 import { useCallback, useContext, useEffect, useState } from "react";
-import { Meal } from "../../../../libreries/models";
+import { Meal } from "models/src/meal.model";
 import { Card } from "../../shared/Card/Card";
 import { CartContext, MealInCart } from "../../store/cart/cartContext";
 import classes from "./AvailableMeals.module.css";

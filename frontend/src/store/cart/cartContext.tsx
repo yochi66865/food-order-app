@@ -5,7 +5,7 @@ import {
   useCallback,
   useReducer,
 } from "react";
-import { Meal } from "../../../../libreries/models";
+import { Meal } from "models/src/meal.model";
 import { cartAction } from "./cartActions";
 import { CartState, cartReducer } from "./cartReducer";
 
