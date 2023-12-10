@@ -1,4 +1,4 @@
-import { ChangeEventHandler, SyntheticEvent } from "react";
+import { SyntheticEvent } from "react";
 
 export interface InputData {
   id: string;

@@ -2,7 +2,8 @@ import express from "express";
 import bodyParser from "body-parser";
 import { Client } from "pg";
 import { queries } from "./db/queries";
-import { Meal, Order, User } from "./models";
+import { Order, User } from "../../libreries/models";
+
 const app = express();
 const port = 3001;
 
@@ -56,13 +57,13 @@ export const start = (client: Client) => {
       });
   });
 
-  app.get("/selectMeals", (_, res) => {
+  app.get("/getMeals", (_, res) => {
     queries.selectMeals(client).then((result) => {
       res.send(result);
     });
   });
 
-  app.post("/selectOrders", (req, res) => {
+  app.post("/getOrders", (req, res) => {
     const { userId } = req.body as { userId: string };
     queries.selectOrders(client, userId).then((result) => {
       res.send(result);

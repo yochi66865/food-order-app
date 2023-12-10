@@ -1,5 +1,5 @@
 import { Client } from "pg";
-import { Meal, Order, User } from ".";
+import { Meal, Order, User } from "../../../libreries/models";
 
 export interface Queries {
   signIn: (

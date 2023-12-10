@@ -1,4 +1,3 @@
-import { Meal } from "../../models/meal.model";
 import { cartAction } from "./cartActions";
 import { MealInCart } from "./cartContext";
 

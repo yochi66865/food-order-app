@@ -1,5 +1,11 @@
-import { Context, Dispatch, createContext, useReducer } from "react";
-import { Meal } from "../../models/meal.model";
+import {
+  Context,
+  Dispatch,
+  createContext,
+  useCallback,
+  useReducer,
+} from "react";
+import { Meal } from "../../../../libreries/models";
 import { cartAction } from "./cartActions";
 import { CartState, cartReducer } from "./cartReducer";
 
@@ -29,7 +35,7 @@ export const CartContextComponent = (props: { children: any }) => {
   const [cartState, dispatchCartAction]: [CartState, Dispatch<cartAction>] =
     useReducer(cartReducer, { meals: {} });
 
-  const getMapMeals = () => ({ ...cartState.meals });
+  const getMapMeals = useCallback(() => ({ ...cartState.meals }), [cartState]);
 
   const getMeals = () => Object.values(cartState.meals);
 

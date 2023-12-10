@@ -1,5 +1,6 @@
-import { Queries, Meal, User, Order } from "../models";
+import { Meal, User, Order } from "../../../libreries/models";
 import { Client } from "pg";
+import { Queries } from "../models/queries.model";
 
 export const queries: Queries = {
   signIn(client: Client, userLogin: Pick<User, "email" | "password">) {
