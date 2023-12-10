@@ -2,7 +2,7 @@ import express from "express";
 import bodyParser from "body-parser";
 import { Client } from "pg";
 import { queries } from "./db/queries";
-import { Order, User } from "models/src/index";
+import { Order, User } from "models";
 
 const app = express();
 const port = 3001;

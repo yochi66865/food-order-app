@@ -1,4 +1,4 @@
-import { Meal, User, Order, Queries } from "models/src/index";
+import { Meal, User, Order, Queries } from "models";
 import { Client } from "pg";
 
 export const queries: Queries = {

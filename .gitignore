@@ -6,10 +6,10 @@
 /models/node_modules
 /frontend/build
 /backend/dist
+/models/dist
 /.pnp
 /extra-files
 .pnp.js
-
 # testing
 /coverage
 
