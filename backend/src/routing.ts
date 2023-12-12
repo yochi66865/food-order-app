@@ -2,7 +2,7 @@ import express from "express";
 import bodyParser from "body-parser";
 import { Client } from "pg";
 import { queries } from "./db/queries";
-import { Order, User } from "models";
+import { LoginUser, Order, User } from "models";
 
 const app = express();
 const port = 3001;
@@ -32,7 +32,7 @@ export const start = (client: Client) => {
   });
 
   app.post("/signIn", (req, res) => {
-    const loginUser = req.body as Pick<User, "email" | "password">;
+    const loginUser = req.body as LoginUser;
     queries
       .signIn(client, loginUser)
       .then((result) => {

@@ -9,3 +9,5 @@ export interface User {
   tel: string;
   address: Address;
 }
+
+export type LoginUser = Pick<User, "email" | "password">;

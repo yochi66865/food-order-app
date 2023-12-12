@@ -1,38 +1,51 @@
-import { Fragment, useState } from "react";
+import { Fragment, useContext, useState } from "react";
 import classes from "./Header.module.css";
 import meals from "../../assets/meals.jpg";
 import { HeaderCartButton } from "./HeaderCartButton/HeaderCartButton";
 import { Modal } from "../../shared/Modal/Modal";
 import { Cart } from "../cart/Cart";
+import { HeaderLoginButton } from "./HeaderLoginButton/HeaderLoginButton";
+import { Account } from "../user/account/Account";
 
 export const Header = () => {
-  const [isShowModal, toggleShowingModal] = useState(false);
+  const [isShowCartModal, toggleShowingCartModal] = useState(false);
+  const [isShowUserModal, toggleShowingUserModal] = useState(false);
 
-  const openModal = () => {
-    toggleShowingModal(true);
+  const toggleCartModal = () => {
+    toggleShowingCartModal((isShowing) => !isShowing);
   };
 
-  const closeModal = () => {
-    toggleShowingModal(false);
+  const toggleUserModal = () => {
+    toggleShowingUserModal((isShowing) => !isShowing);
   };
 
-  const saveModal = () => {
+  const saveCartModal = () => {
     console.log("order");
-    toggleShowingModal(false);
+    toggleCartModal();
   };
 
   return (
     <Fragment>
       <div className={classes.header}>
         <h2>ReactMeals</h2>
-        <HeaderCartButton onClick={openModal}></HeaderCartButton>
+        <HeaderCartButton onClick={toggleCartModal}></HeaderCartButton>
+        <HeaderLoginButton
+          onClick={toggleUserModal}
+          toggleArrow={isShowUserModal}
+        ></HeaderLoginButton>
+        {isShowUserModal && (
+          <Account
+            className={classes.user}
+            closeModal={toggleUserModal}
+          ></Account>
+        )}
       </div>
       <div className={classes["main-image"]}>
         <img src={meals} alt="meals" />
       </div>
-      {isShowModal && (
-        <Modal onClose={closeModal}>
-          <Cart onClose={closeModal} onSave={saveModal}></Cart>
+      {isShowCartModal && (
+        <Modal onClose={toggleCartModal}>
+          <Cart onClose={toggleCartModal} onSave={saveCartModal}></Cart>
         </Modal>
       )}
     </Fragment>

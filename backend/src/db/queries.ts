@@ -1,8 +1,8 @@
-import { Meal, User, Order, Queries } from "models";
+import { Meal, User, Order, Queries, LoginUser } from "models";
 import { Client } from "pg";
 
 export const queries: Queries = {
-  signIn(client: Client, userLogin: Pick<User, "email" | "password">) {
+  signIn(client: Client, userLogin: LoginUser) {
     return new Promise((resolve, reject) => {
       client.query(
         `SELECT * from users where email = $1 and password = $2`,
