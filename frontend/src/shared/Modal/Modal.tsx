@@ -10,11 +10,12 @@ const Overlay = (props: { children: any }) => (
   <div className={classes.modal}>{props.children}</div>
 );
 
-export const Modal = (props: { children: any; onClose: () => void }) => {
+const emptyMethod = () => {};
+export const Modal = (props: { children: any; onClose?: () => void }) => {
   return (
     <Fragment>
       {createPortal(
-        <Backdrop onClick={props.onClose} />,
+        <Backdrop onClick={props.onClose ?? emptyMethod} />,
         document.getElementById("backdrop-root")!
       )}
       {createPortal(

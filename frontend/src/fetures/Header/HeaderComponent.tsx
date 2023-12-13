@@ -36,7 +36,7 @@ export const Header = () => {
         {isShowUserModal && (
           <Account
             className={classes.user}
-            closeModal={toggleUserModal}
+            closeAccountModal={toggleUserModal}
           ></Account>
         )}
       </div>

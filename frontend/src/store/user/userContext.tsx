@@ -15,6 +15,7 @@ export type UserType = {
   signUp: (user: User) => void;
   signOut: () => void;
   getCurrentUser: () => User | null;
+  isLoading: boolean;
 };
 
 export const UserContext: Context<UserType> = createContext({
@@ -22,12 +23,15 @@ export const UserContext: Context<UserType> = createContext({
   signUp: (user: User) => {},
   signOut: () => {},
   getCurrentUser: () => ({ id: "111", fname: "Yochi" } as User | null),
+  isLoading: false as boolean,
 });
 
 export const UserContextComponent = (props: { children: any }) => {
   const { isLoading, hasError, sendRequest } = useRequest();
   const [userState, dispatchUserAction]: [UserState, Dispatch<userActions>] =
-    useReducer(userReducer, { currentUser: null });
+    useReducer(userReducer, {
+      currentUser: { id: "111", fname: "Yochi" } as User | null,
+    });
 
   const signIn = (loginUser: LoginUser) => {
     sendRequest("signIn", {
@@ -38,7 +42,7 @@ export const UserContextComponent = (props: { children: any }) => {
       },
     })
       .then((response) => {
-        if (response.id) {
+        if (response.id && !hasError) {
           dispatchUserAction({ type: "SIGN_IN", value: { user: response } });
         } else {
           throw new Error("this user is not exists. please sign up");
@@ -58,7 +62,7 @@ export const UserContextComponent = (props: { children: any }) => {
       },
     })
       .then((response) => {
-        if (response.id) {
+        if (response.id && !hasError) {
           dispatchUserAction({ type: "SIGN_IN", value: { user: response } });
         } else {
           throw new Error("error accurd when try sign up.");
@@ -84,6 +88,7 @@ export const UserContextComponent = (props: { children: any }) => {
         signUp,
         signOut,
         getCurrentUser,
+        isLoading,
       }}
     >
       {props.children}
