@@ -12,7 +12,7 @@ import { useRequest } from "../../hooks/useRequest";
 
 export type UserType = {
   signIn: (signInUserDetails: LoginUser) => void;
-  signUp: (user: User) => void;
+  signUp: (user: Omit<User, "id">) => void;
   signOut: () => void;
   getCurrentUser: () => User | null;
   isLoading: boolean;
@@ -20,7 +20,7 @@ export type UserType = {
 
 export const UserContext: Context<UserType> = createContext({
   signIn: (signInUserDetails: LoginUser) => {},
-  signUp: (user: User) => {},
+  signUp: (user: Omit<User, "id">) => {},
   signOut: () => {},
   getCurrentUser: () => ({ id: "111", fname: "Yochi" } as User | null),
   isLoading: false as boolean,
@@ -53,7 +53,7 @@ export const UserContextComponent = (props: { children: any }) => {
       });
   };
 
-  const signUp = (user: User) => {
+  const signUp = (user: Omit<User, "id">) => {
     sendRequest("signUp", {
       method: "POST",
       body: JSON.stringify(user),

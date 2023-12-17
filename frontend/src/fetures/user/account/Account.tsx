@@ -3,6 +3,7 @@ import classes from "./Account.module.css";
 import { UserContext } from "../../../store/user/userContext";
 import { Modal } from "../../../shared/Modal/Modal";
 import { Login } from "../LoginForm/Login";
+import { Register } from "../RegisterForm/Register";
 
 export const Account = (props: {
   className?: string;
@@ -28,7 +29,12 @@ export const Account = (props: {
   };
 
   const openSignUpModal = () => {
-    props.closeAccountModal();
+    const onClosePopup = () => {
+      toggleShowingModal(false);
+      props.closeAccountModal();
+    };
+    changeModalContent(<Register onClosePopup={onClosePopup}></Register>);
+    toggleShowingModal(true);
   };
 
   const signOutHandler = () => {

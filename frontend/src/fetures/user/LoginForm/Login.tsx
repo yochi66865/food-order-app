@@ -5,17 +5,16 @@ import { AccountForm } from "../AccountForm/AccountForm";
 import { Input } from "../../../shared/Input/Input";
 import { useInput } from "../../../hooks/useInput";
 
-const isVaildEmail = (value: string | number) => {
-  return (value as string).includes("@");
+const isVaildEmail = (value: string) => {
+  return value.includes("@");
 };
 
-const isVaildPassword = (value: string | number) => {
-  return (value as string).length >= 6 && /[A-Z]/.test(value as string);
+const isVaildPassword = (value: string) => {
+  return value.length >= 6 && /[A-Z]/.test(value);
 };
 
 export const Login = ({ onClosePopup }: { onClosePopup: () => void }) => {
   const userctx = useContext(UserContext);
-  const user = userctx.getCurrentUser();
   const {
     hasErrorInput: hasErrorEmailInput,
     onChangeHandler: onChangeEmailHandler,
@@ -36,8 +35,8 @@ export const Login = ({ onClosePopup }: { onClosePopup: () => void }) => {
 
   const onSave = () => {
     userctx.signIn({
-      email: valueEmailInput as string,
-      password: valuePasswordInput as string,
+      email: valueEmailInput,
+      password: valuePasswordInput,
     });
     onCloseLoginPopup();
   };

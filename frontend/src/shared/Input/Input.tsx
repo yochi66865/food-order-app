@@ -14,8 +14,11 @@ export const Input = ({
 
   return (
     <div className={`${classes["input-container"]} ${className ?? ""}`}>
-      <div className={classes.input}>
+      <div className={classes["label-container"]}>
         <label htmlFor={inputData.id}>{inputData.label}</label>
+        {inputData.isRequierd && <span>*</span>}
+      </div>
+      <div className={classes.input}>
         <input
           id={inputData.id}
           type={inputData.type}
@@ -25,10 +28,10 @@ export const Input = ({
           onChange={inputData.onChange ?? onChangeHandler}
           onBlur={inputData.onBlur ?? onBlurHandler}
         />
+        {inputData.error?.isShowErrorMsg && (
+          <span className={classes.error}>{inputData.error?.errorMsg}</span>
+        )}
       </div>
-      {inputData.error?.isShowErrorMsg && (
-        <span className={classes.error}>{inputData.error?.errorMsg}</span>
-      )}
     </div>
   );
 };

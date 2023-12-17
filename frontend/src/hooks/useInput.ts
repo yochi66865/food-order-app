@@ -1,9 +1,7 @@
 import { Dispatch, SyntheticEvent, useReducer } from "react";
 
-type InputActions =
-  | { type: "INPUT_CHANGE"; value: string | number }
-  | { type: "BLUR" };
-type InputState = { value: string | number; isTouched: boolean };
+type InputActions = { type: "INPUT_CHANGE"; value: string } | { type: "BLUR" };
+type InputState = { value: string; isTouched: boolean };
 
 const InputReducer = (state: InputState, action: InputActions) => {
   switch (action.type) {
@@ -16,9 +14,7 @@ const InputReducer = (state: InputState, action: InputActions) => {
   }
 };
 
-export const useInput = (
-  validateMethod: (value: string | number) => boolean
-) => {
+export const useInput = (validateMethod: (value: string) => boolean) => {
   const [state, dispatchAction]: [InputState, Dispatch<InputActions>] =
     useReducer(InputReducer, { value: "", isTouched: false });
 
