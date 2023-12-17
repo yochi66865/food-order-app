@@ -8,4 +8,10 @@ export interface InputData {
   max?: number;
   onChange?: (event: SyntheticEvent<HTMLInputElement>) => void;
   onBlur?: (event: SyntheticEvent<HTMLInputElement>) => void;
+  error?: errorData;
+}
+
+export interface errorData {
+  isShowErrorMsg: boolean;
+  errorMsg: string;
 }

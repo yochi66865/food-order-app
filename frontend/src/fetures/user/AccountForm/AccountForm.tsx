@@ -5,10 +5,12 @@ export const AccountForm = ({
   onClose,
   onSave,
   children,
+  isValidForm,
 }: {
   onClose: () => void;
   onSave: () => void;
   children: any;
+  isValidForm: boolean;
 }) => {
   const submitHandler = (event: SyntheticEvent) => {
     event.preventDefault();
@@ -22,7 +24,8 @@ export const AccountForm = ({
           cancel
         </button>
         <button
-          className={`${classes.button} ${false ? classes.disabled : ""}`}
+          disabled={!isValidForm}
+          className={classes.button}
           onClick={onSave}
           type="submit"
         >

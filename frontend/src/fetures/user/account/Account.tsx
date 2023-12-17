@@ -19,9 +19,12 @@ export const Account = (props: {
   };
 
   const openSignInModal = () => {
-    changeModalContent(<Login></Login>);
+    const onClosePopup = () => {
+      toggleShowingModal(false);
+      props.closeAccountModal();
+    };
+    changeModalContent(<Login onClosePopup={onClosePopup}></Login>);
     toggleShowingModal(true);
-    // props.closeAccountModal();
   };
 
   const openSignUpModal = () => {

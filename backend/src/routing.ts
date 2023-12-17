@@ -38,9 +38,9 @@ export const start = (client: Client) => {
       .then((result) => {
         res.send(result);
       })
-      .catch((err) => {
+      .catch(({ message }) => {
         res.statusCode = 401;
-        res.send(err.message);
+        res.send({ message });
       });
   });
 
@@ -51,9 +51,9 @@ export const start = (client: Client) => {
       .then((result) => {
         res.send(result);
       })
-      .catch((err) => {
+      .catch(({ message }) => {
         res.statusCode = 401;
-        res.send(err.message);
+        res.send({ message });
       });
   });
 
