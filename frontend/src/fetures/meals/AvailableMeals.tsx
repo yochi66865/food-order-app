@@ -5,15 +5,17 @@ import { CartContext, MealInCart } from "../../store/cart/cartContext";
 import classes from "./AvailableMeals.module.css";
 import { MealItem } from "./MealItem/MealItem";
 import { useRequest } from "../../hooks/useRequest";
+import { MealsContext } from "../../store/meals/mealsContext";
 
 export const AvailableMeals = () => {
-  const { isLoading, hasError, sendRequest } = useRequest();
   const cartCtx = useContext(CartContext);
+  const mealsCtx = useContext(MealsContext);
+  const { getMeals, isLoading } = mealsCtx;
   const mealsInCart = cartCtx.getMapMeals();
   const [mealsData, setMealsData] = useState([] as MealInCart[]);
 
-  const getMeals = useCallback(async () => {
-    const meals = (await sendRequest("getMeals")) as Meal[];
+  const getAvailableMeals = useCallback(async () => {
+    const meals = getMeals();
     console.log("meals", meals);
 
     setMealsData(
@@ -22,11 +24,11 @@ export const AvailableMeals = () => {
         return { ...meal, amount: mealInCart?.amount ?? 0 };
       })
     );
-  }, [sendRequest]);
+  }, [getMeals]);
 
   useEffect(() => {
-    getMeals();
-  }, [getMeals]);
+    getAvailableMeals();
+  }, [getAvailableMeals]);
 
   const addToCart = (mealData: MealInCart) => {
     cartCtx.addMeal(mealData);

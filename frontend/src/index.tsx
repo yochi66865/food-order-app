@@ -5,6 +5,7 @@ import { App } from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { CartContextComponent } from "./store/cart/cartContext";
 import { UserContextComponent } from "./store/user/userContext";
+import { MealsContextComponent } from "./store/meals/mealsContext";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -13,11 +14,13 @@ root.render(
   <React.StrictMode>
     <div id="backdrop-root"></div>
     <div id="overlay-root"></div>
-    <UserContextComponent>
-      <CartContextComponent>
-        <App />
-      </CartContextComponent>
-    </UserContextComponent>
+    <MealsContextComponent>
+      <UserContextComponent>
+        <CartContextComponent>
+          <App />
+        </CartContextComponent>
+      </UserContextComponent>
+    </MealsContextComponent>
   </React.StrictMode>
 );
 
