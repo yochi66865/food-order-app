@@ -4,6 +4,7 @@ import { UserContext } from "../../../store/user/userContext";
 import { Modal } from "../../../shared/Modal/Modal";
 import { Login } from "../LoginForm/Login";
 import { Register } from "../RegisterForm/Register";
+import { Orders } from "../OrdersModal/Orders";
 
 export const Account = (props: {
   className?: string;
@@ -12,9 +13,10 @@ export const Account = (props: {
   const userCtx = useContext(UserContext);
   const isLoggedIn = !!userCtx.getCurrentUser()?.id;
   const [isShowModal, toggleShowingModal] = useState(false);
-  const [modalContent, changeModalContent] = useState(<>ddd</>);
+  const [modalContent, changeModalContent] = useState(<></>);
 
   const openOrdersModal = () => {
+    changeModalContent(<Orders></Orders>);
     toggleShowingModal(true);
     // props.closeAccountModal();
   };

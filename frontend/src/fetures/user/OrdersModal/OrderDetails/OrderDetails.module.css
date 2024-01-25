@@ -1,0 +1,53 @@
+.order-item {
+  display: flex;
+  flex-direction: column;
+
+  .header {
+    display: flex;
+
+    .status {
+      flex: 4;
+      text-align: left;
+    }
+  }
+
+  .details {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 40%;
+
+    .order-id {
+      width: 100%;
+      display: flex;
+      align-items: center;
+
+      span {
+        width: 90%;
+        overflow: hidden;
+        white-space: nowrap;
+        display: inline-block;
+        text-overflow: ellipsis;
+        text-align: left;
+      }
+    }
+  }
+
+  .button {
+    background-color: transparent;
+    border: none;
+    border-left: 0.5px solid gray;
+
+    .arrow-icon {
+      align-self: flex-end;
+      margin-left: 0.3rem;
+    }
+
+    .arrow-icon.open {
+      transform: rotate(180deg);
+    }
+  }
+  .meals.close {
+    display: none;
+  }
+}

@@ -65,7 +65,7 @@ export const queries: Queries = {
         [userId],
         (err, result) => {
           if (!err) {
-            resolve(result.rows[0]);
+            resolve(result.rows);
           } else {
             reject(err);
           }
