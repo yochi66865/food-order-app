@@ -9,7 +9,7 @@ import { Meal } from "models";
 import { cartAction } from "./cartActions";
 import { CartState, cartReducer } from "./cartReducer";
 
-export type MealInCart = Meal & { amount: number };
+export type MealInCart = { meal: Meal; amount: number };
 
 export type cartType = {
   getMapMeals: () => { [mealId: string]: MealInCart };
@@ -39,7 +39,8 @@ export const CartContextComponent = (props: { children: any }) => {
 
   const getMeals = () => Object.values(cartState.meals);
 
-  const getTotalOfMeal = (meal: MealInCart) => meal.amount * meal.price;
+  const getTotalOfMeal = (mealInCart: MealInCart) =>
+    mealInCart.amount * mealInCart.meal.price;
 
   const getTotalCart = () => +sum(getMeals().map(getTotalOfMeal)).toFixed(2);
 

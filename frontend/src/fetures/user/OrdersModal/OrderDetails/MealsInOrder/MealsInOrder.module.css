@@ -1,0 +1,16 @@
+.meals {
+  display: flex;
+  flex-direction: column;
+
+  .meal-item {
+    display: flex;
+  }
+}
+
+.meal-item {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  border-bottom: 0.5px solid gray;
+  padding-bottom: 5px;
+}

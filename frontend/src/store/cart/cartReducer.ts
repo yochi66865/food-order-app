@@ -13,7 +13,10 @@ export const cartReducer: (
     case "ADD_MEAL": {
       const { mealInCart } = action.value;
       return {
-        meals: { ...state.meals, ...{ [mealInCart.id]: { ...mealInCart } } },
+        meals: {
+          ...state.meals,
+          ...{ [mealInCart.meal.id]: { ...mealInCart } },
+        },
       };
     }
     case "DELETE_MEAL": {

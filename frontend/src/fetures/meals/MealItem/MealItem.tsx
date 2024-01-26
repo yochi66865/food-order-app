@@ -16,9 +16,9 @@ export const MealItem = ({
   return (
     <div className={classes.meal}>
       <div className={classes["meal-item"]}>
-        <h3>{mealData.name}</h3>
-        <div className={classes.description}>{mealData.description}</div>
-        <div className={classes.price}>${mealData.price}</div>
+        <h3>{mealData.meal.name}</h3>
+        <div className={classes.description}>{mealData.meal.description}</div>
+        <div className={classes.price}>${mealData.meal.price}</div>
       </div>
       <div className={classes["meal-item-form"]}>
         <MealItemForm

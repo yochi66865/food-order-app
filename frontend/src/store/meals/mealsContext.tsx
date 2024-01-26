@@ -13,12 +13,14 @@ import { mealsReducer, mealsState } from "./mealsReducer";
 export type MealsType = {
   fetchMeals: () => void;
   getMeals: () => Meal[];
+  getMealsMap: () => { [id: string]: Meal };
   isLoading: boolean;
 };
 
 export const MealsContext: Context<MealsType> = createContext({
   fetchMeals: () => {},
   getMeals: () => [] as Meal[],
+  getMealsMap: () => ({} as { [id: string]: Meal }),
   isLoading: false as boolean,
 });
 
@@ -55,11 +57,23 @@ export const MealsContextComponent = (props: { children: any }) => {
     return mealsState.meals ?? [];
   }, [mealsState]);
 
+  const getMealsMap = useCallback(() => {
+    const mealsMap = getMeals().reduce(
+      (map: { [id: string]: Meal }, meal: Meal) => {
+        map[meal.id] = meal;
+        return map;
+      },
+      {}
+    );
+    return mealsMap;
+  }, [getMeals]);
+
   return (
     <MealsContext.Provider
       value={{
         fetchMeals,
         getMeals,
+        getMealsMap,
         isLoading,
       }}
     >

@@ -21,7 +21,7 @@ export const AvailableMeals = () => {
     setMealsData(
       meals.map((meal) => {
         const mealInCart = mealsInCart[meal.id];
-        return { ...meal, amount: mealInCart?.amount ?? 0 };
+        return { meal, amount: mealInCart?.amount ?? 0 };
       })
     );
   }, [getMeals]);
@@ -38,7 +38,7 @@ export const AvailableMeals = () => {
     <Card className={classes.meals}>
       <ul className="meals">
         {mealsData.map((mealData) => (
-          <li key={mealData.id}>
+          <li key={mealData.meal.id}>
             <MealItem mealData={mealData} addToCart={addToCart} />
           </li>
         ))}

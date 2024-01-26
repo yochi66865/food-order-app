@@ -1,8 +1,0 @@
-.meals {
-  display: flex;
-  flex-direction: column;
-
-  .meal-item {
-    display: flex;
-  }
-}

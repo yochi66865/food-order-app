@@ -4,7 +4,7 @@ import { ArrowIcon } from "../../../../shared/icons/ArrowIcon/ArrowIcon";
 import { useState } from "react";
 import { CopyIcon } from "../../../../shared/icons/CopyIcon/CartIcon";
 import copy from "copy-to-clipboard";
-import { MealsDetails } from "./mealsDetails/mealsDetails";
+import { MealsInOrder } from "./MealsInOrder/MealsInOrder";
 
 export const OrderDetails = ({ order }: { order: Order }) => {
   const [isOpenArrow, toggleArrow] = useState(false);
@@ -37,9 +37,11 @@ export const OrderDetails = ({ order }: { order: Order }) => {
           order details <ArrowIcon className={arrowClass} />
         </button>
       </div>
-      <div className={`${classes.meals} ${!isOpenArrow ? classes.close : ""}`}>
-        <MealsDetails meals={order.meals}></MealsDetails>
-      </div>
+      {isOpenArrow && (
+        <div className={classes.meals}>
+          <MealsInOrder meals={order.meals}></MealsInOrder>
+        </div>
+      )}
     </div>
   );
 };

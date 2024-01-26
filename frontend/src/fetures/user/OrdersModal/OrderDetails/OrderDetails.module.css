@@ -4,6 +4,7 @@
 
   .header {
     display: flex;
+    border-bottom: 1px dashed lightgray;
 
     .status {
       flex: 4;
@@ -46,8 +47,5 @@
     .arrow-icon.open {
       transform: rotate(180deg);
     }
-  }
-  .meals.close {
-    display: none;
   }
 }

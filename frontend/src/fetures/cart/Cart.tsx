@@ -15,22 +15,22 @@ export const Cart = ({
   const meals = CartCtx.getMeals();
   const totalCart = CartCtx.getTotalCart();
 
-  const updateAmount = (meal: MealInCart) => {
-    if (meal.amount === 0) {
-      CartCtx.deleteMeal(meal.id);
+  const updateAmount = (mealInCart: MealInCart) => {
+    if (mealInCart.amount === 0) {
+      CartCtx.deleteMeal(mealInCart.meal.id);
     } else {
-      CartCtx.updateAmount(meal.id, meal.amount);
+      CartCtx.updateAmount(mealInCart.meal.id, mealInCart.amount);
     }
   };
 
   return (
     <Fragment>
       <ul className={classes["cart-items"]}>
-        {meals.map((meal) => (
+        {meals.map((mealInCart) => (
           <CartItem
-            meal={meal}
+            mealInCart={mealInCart}
             updateAmount={updateAmount}
-            key={meal.id}
+            key={mealInCart.meal.id}
           ></CartItem>
         ))}
       </ul>
