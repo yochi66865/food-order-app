@@ -61,7 +61,7 @@ export const queries: Queries = {
   selectOrders(client: Client, userId: string) {
     return new Promise((resolve, reject) => {
       client.query(
-        `SELECT * from orders where "userId" = $1`,
+        `SELECT * from orders where "userId" = $1 order by "orderDate" desc`,
         [userId],
         (err, result) => {
           if (!err) {

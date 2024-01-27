@@ -17,6 +17,7 @@ export const MealsInOrder = memo(({ meals }: { meals: mealInOrder[] }) => {
             meal={currentMeal}
             amount={meal.amount}
             className={classes["meal-item"]}
+            key={meal.mealId}
           ></MealDetails>
         );
       })}

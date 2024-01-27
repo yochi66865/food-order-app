@@ -14,27 +14,26 @@ export const Account = (props: {
   const isLoggedIn = !!userCtx.getCurrentUser()?.id;
   const [isShowModal, toggleShowingModal] = useState(false);
   const [modalContent, changeModalContent] = useState(<></>);
+  const [isCloseModalByBackground, closeModalByBackground] = useState(false);
+
+  const onClosePopup = () => {
+    toggleShowingModal(false);
+    props.closeAccountModal();
+  };
 
   const openOrdersModal = () => {
     changeModalContent(<Orders></Orders>);
+    closeModalByBackground(true);
     toggleShowingModal(true);
     // props.closeAccountModal();
   };
 
   const openSignInModal = () => {
-    const onClosePopup = () => {
-      toggleShowingModal(false);
-      props.closeAccountModal();
-    };
     changeModalContent(<Login onClosePopup={onClosePopup}></Login>);
     toggleShowingModal(true);
   };
 
   const openSignUpModal = () => {
-    const onClosePopup = () => {
-      toggleShowingModal(false);
-      props.closeAccountModal();
-    };
     changeModalContent(<Register onClosePopup={onClosePopup}></Register>);
     toggleShowingModal(true);
   };
@@ -65,7 +64,11 @@ export const Account = (props: {
       <div className={`${classes.account} ${props.className ?? ""}`}>
         {accountContent}
       </div>
-      {isShowModal && <Modal>{modalContent}</Modal>}
+      {isShowModal && (
+        <Modal onClose={isCloseModalByBackground ? onClosePopup : () => {}}>
+          {modalContent}
+        </Modal>
+      )}
     </>
   );
 };

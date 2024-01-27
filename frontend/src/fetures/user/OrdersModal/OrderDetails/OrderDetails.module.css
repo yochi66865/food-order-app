@@ -4,11 +4,12 @@
 
   .header {
     display: flex;
-    border-bottom: 1px dashed lightgray;
+    border-bottom: 1px dashed brown;
 
     .status {
       flex: 4;
       text-align: left;
+      color: darkgoldenrod;
     }
   }
 
