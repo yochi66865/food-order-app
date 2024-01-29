@@ -35,7 +35,7 @@ export const CartContextComponent = (props: { children: any }) => {
   const [cartState, dispatchCartAction]: [CartState, Dispatch<cartAction>] =
     useReducer(cartReducer, { meals: {} });
 
-  const getMapMeals = useCallback(() => ({ ...cartState.meals }), [cartState]);
+  const getMapMeals = useCallback(() => cartState.meals, [cartState]);
 
   const getMeals = () => Object.values(cartState.meals);
 

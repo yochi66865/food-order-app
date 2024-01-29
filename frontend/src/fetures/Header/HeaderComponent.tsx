@@ -19,11 +19,6 @@ export const Header = () => {
     toggleShowingUserModal((isShowing) => !isShowing);
   };
 
-  const saveCartModal = () => {
-    console.log("order");
-    toggleCartModal();
-  };
-
   return (
     <Fragment>
       <div className={classes.header}>
@@ -45,7 +40,7 @@ export const Header = () => {
       </div>
       {isShowCartModal && (
         <Modal onClose={toggleCartModal}>
-          <Cart onClose={toggleCartModal} onSave={saveCartModal}></Cart>
+          <Cart onClose={toggleCartModal}></Cart>
         </Modal>
       )}
     </Fragment>

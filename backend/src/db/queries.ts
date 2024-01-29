@@ -77,8 +77,14 @@ export const queries: Queries = {
   async dispatchOrder(client: Client, order: Order) {
     return new Promise((resolve, reject) => {
       client.query(
-        `INSERT INTO orders("userId", meals, total) VALUES ($1, $2, $3) RETURNING *`,
-        [order.userId, order.meals, order.total],
+        `INSERT INTO orders("userId", meals, total, "orderDate", status) VALUES ($1, $2, $3, $4, $5) RETURNING *`,
+        [
+          order.userId,
+          JSON.stringify(order.meals),
+          order.total,
+          order.orderDate,
+          order.status,
+        ],
         (err, result) => {
           if (!err) {
             resolve(result.rows[0]);

@@ -16,15 +16,13 @@ export const AvailableMeals = () => {
 
   const getAvailableMeals = useCallback(async () => {
     const meals = getMeals();
-    console.log("meals", meals);
-
     setMealsData(
       meals.map((meal) => {
         const mealInCart = mealsInCart[meal.id];
         return { meal, amount: mealInCart?.amount ?? 0 };
       })
     );
-  }, [getMeals]);
+  }, [getMeals, mealsInCart]);
 
   useEffect(() => {
     getAvailableMeals();

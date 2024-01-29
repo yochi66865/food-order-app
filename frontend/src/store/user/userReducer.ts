@@ -26,7 +26,7 @@ export const userReducer: (
       const { order } = action.value;
       return {
         ...state,
-        orders: state.orders?.concat(order) ?? [order],
+        orders: [order].concat(...(state.orders ?? [])),
       };
     }
   }

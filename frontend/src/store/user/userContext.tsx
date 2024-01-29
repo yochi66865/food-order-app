@@ -1,4 +1,4 @@
-import { LoginUser, Order, User } from "models";
+import { LoginUser, Order, OrderInput, User } from "models";
 import { Context, Dispatch, createContext, useReducer } from "react";
 import { useRequest } from "../../hooks/useRequest";
 import { userActions } from "./userActions";
@@ -10,7 +10,7 @@ export type UserType = {
   signOut: () => void;
   getCurrentUser: () => User | null;
   fetchOrders: (userId: string) => void;
-  setNewOrder: (order: Order) => void;
+  setNewOrder: (order: OrderInput) => void;
   getOrders: () => Order[] | null;
   isLoading: boolean;
 };
@@ -21,7 +21,7 @@ export const UserContext: Context<UserType> = createContext({
   signOut: () => {},
   getCurrentUser: () => ({ id: "111", fname: "Yochi" } as User | null),
   fetchOrders: (userId: string) => {},
-  setNewOrder: (order: Order) => {},
+  setNewOrder: (order: OrderInput) => {},
   getOrders: () => [] as Order[] | null,
   isLoading: false as boolean,
 });
@@ -107,7 +107,7 @@ export const UserContextComponent = (props: { children: any }) => {
       });
   };
 
-  const setNewOrder = (order: Order) => {
+  const setNewOrder = (order: OrderInput) => {
     sendRequest("dispatchOrder", {
       method: "POST",
       body: JSON.stringify(order),
@@ -119,7 +119,7 @@ export const UserContextComponent = (props: { children: any }) => {
         if ((response as Order)?.id && !hasError) {
           dispatchUserAction({
             type: "SET_NEW_ORDER",
-            value: { order: response },
+            value: { order: { ...order, id: response.id } },
           });
         } else {
           throw new Error("error accourd when trying set new order");
