@@ -10,7 +10,7 @@ export type UserType = {
   signOut: () => void;
   getCurrentUser: () => User | null;
   fetchOrders: (userId: string) => void;
-  setNewOrder: (order: OrderInput) => void;
+  setNewOrder: (order: OrderInput) => Promise<boolean>;
   getOrders: () => Order[] | null;
   isLoading: boolean;
 };
@@ -21,7 +21,7 @@ export const UserContext: Context<UserType> = createContext({
   signOut: () => {},
   getCurrentUser: () => ({ id: "111", fname: "Yochi" } as User | null),
   fetchOrders: (userId: string) => {},
-  setNewOrder: (order: OrderInput) => {},
+  setNewOrder: (order: OrderInput) => Promise.resolve(true as boolean),
   getOrders: () => [] as Order[] | null,
   isLoading: false as boolean,
 });
@@ -108,7 +108,7 @@ export const UserContextComponent = (props: { children: any }) => {
   };
 
   const setNewOrder = (order: OrderInput) => {
-    sendRequest("dispatchOrder", {
+    return sendRequest("dispatchOrder", {
       method: "POST",
       body: JSON.stringify(order),
       headers: {
@@ -121,12 +121,14 @@ export const UserContextComponent = (props: { children: any }) => {
             type: "SET_NEW_ORDER",
             value: { order: { ...order, id: response.id } },
           });
+          return true;
         } else {
           throw new Error("error accourd when trying set new order");
         }
       })
       .catch((error) => {
         alert(error.message);
+        return false;
       });
   };
 

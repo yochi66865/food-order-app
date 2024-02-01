@@ -11,6 +11,8 @@ export const Cart = ({ onClose }: { onClose: () => void }) => {
   const userCtx = useContext(UserContext);
   const meals = cartCtx.getMeals();
   const totalCart = cartCtx.getTotalCart();
+  const [isSendingNewOrder, sendingNewOrder] = useState(false);
+  const [isSaveOrder, SaveOrder] = useState(false);
 
   const updateAmount = (mealInCart: MealInCart) => {
     if (mealInCart.amount === 0) {
@@ -20,7 +22,8 @@ export const Cart = ({ onClose }: { onClose: () => void }) => {
     }
   };
 
-  const saveCartModal = () => {
+  const saveCartModal = async () => {
+    sendingNewOrder(true);
     const user = userCtx.getCurrentUser();
     if (user) {
       const meals: mealInOrder[] = cartCtx.getMeals().map((mealInCart) => ({
@@ -35,14 +38,23 @@ export const Cart = ({ onClose }: { onClose: () => void }) => {
         total: cartCtx.getTotalCart(),
         userId: user.id,
       };
-      userCtx.setNewOrder(newOrder);
+      const isSavedOrder = await userCtx.setNewOrder(newOrder);
+      if (isSavedOrder) {
+        SaveOrder(true);
+        cartCtx.clearCart();
+      }
     } else {
       alert("you are not logged in yet. please login before order.");
     }
+    sendingNewOrder(false);
+  };
+
+  const onCloseAfterSaved = () => {
+    SaveOrder(false);
     onClose();
   };
 
-  return (
+  const cartContext = (
     <Fragment>
       <ul className={classes["cart-items"]}>
         {meals.map((mealInCart) => (
@@ -71,5 +83,26 @@ export const Cart = ({ onClose }: { onClose: () => void }) => {
         </button>
       </div>
     </Fragment>
+  );
+
+  const sendNewOrderContext = <p>sending...</p>;
+
+  const successfullyOrdered = (
+    <Fragment>
+      <p>successfully save the order</p>
+      <div className={classes.actions}>
+        <button className={classes["button--alt"]} onClick={onCloseAfterSaved}>
+          close
+        </button>
+      </div>
+    </Fragment>
+  );
+
+  return (
+    <>
+      {!isSendingNewOrder && !isSaveOrder && cartContext}
+      {isSendingNewOrder && sendNewOrderContext}
+      {isSaveOrder && successfullyOrdered}
+    </>
   );
 };

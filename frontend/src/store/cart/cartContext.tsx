@@ -19,6 +19,7 @@ export type cartType = {
   addMeal: (mealInCart: MealInCart) => void;
   deleteMeal: (mealId: string) => void;
   updateAmount: (mealId: string, amount: number) => void;
+  clearCart: () => void;
 };
 
 export const CartContext: Context<cartType> = createContext({
@@ -29,6 +30,7 @@ export const CartContext: Context<cartType> = createContext({
   addMeal: (mealInCart: MealInCart) => {},
   deleteMeal: (mealId: string) => {},
   updateAmount: (mealId: string, amount: number) => {},
+  clearCart: () => {},
 });
 
 export const CartContextComponent = (props: { children: any }) => {
@@ -62,6 +64,11 @@ export const CartContextComponent = (props: { children: any }) => {
       value: { mealId, amount },
     });
   };
+
+  const clearCart = () => {
+    dispatchCartAction({ type: "CLEAR_CART" });
+  };
+
   return (
     <CartContext.Provider
       value={{
@@ -72,6 +79,7 @@ export const CartContextComponent = (props: { children: any }) => {
         addMeal,
         deleteMeal,
         updateAmount,
+        clearCart,
       }}
     >
       {props.children}

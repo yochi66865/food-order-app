@@ -15,4 +15,12 @@ export type updateAmountAction = {
   value: { mealId: string; amount: number };
 };
 
-export type cartAction = addMealAction | deleteMealAction | updateAmountAction;
+export type clearCartAction = {
+  type: "CLEAR_CART";
+};
+
+export type cartAction =
+  | addMealAction
+  | deleteMealAction
+  | updateAmountAction
+  | clearCartAction;

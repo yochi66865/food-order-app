@@ -30,5 +30,8 @@ export const cartReducer: (
       const meals = { ...state.meals };
       return { meals: { ...meals, [mealId]: { ...meals[mealId], amount } } };
     }
+    case "CLEAR_CART": {
+      return { meals: {} };
+    }
   }
 };
