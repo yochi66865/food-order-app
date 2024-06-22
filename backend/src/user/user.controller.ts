@@ -1,13 +1,13 @@
-import { Controller, Post } from '@nestjs/common';
+import { Body, Controller, Post } from '@nestjs/common';
 import { UserService } from './user.service';
-import { User } from 'models';
+import { LoginUser, User } from 'models';
 
 @Controller('user')
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
-  @Post()
-  signIn(): User {
-    return this.userService.signIn();
+  @Post('signIn')
+  signIn(@Body() loginUser: LoginUser): Promise<User> {
+    return this.userService.signIn(loginUser);
   }
 }

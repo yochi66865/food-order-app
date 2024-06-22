@@ -4,6 +4,8 @@ import { AppService } from './app.service';
 import { UserModule } from './user/user.module';
 import { ConfigModule } from '@nestjs/config';
 import configuration from '../assets/config/configuration';
+import { DbService } from './db/db.service.ts';
+import { DbModule } from './db/db.module';
 
 @Module({
   imports: [
@@ -12,8 +14,9 @@ import configuration from '../assets/config/configuration';
       isGlobal: true,
       load: [configuration],
     }),
+    DbModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, DbService],
 })
 export class AppModule {}
